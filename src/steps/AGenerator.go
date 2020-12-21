@@ -47,23 +47,31 @@ func Call(funcName string, params ...interface{}) (result interface{}, err error
 	return
 }
 
-// GenerateNewNextStepEvent generates a new Event with UUID and timestamp.
-func GenerateNewNextStepEvent(stepName string) entities.NextStepEvent {
-	var nextStepEvent entities.NextStepEvent
+// GenerateNewNextStepEventForNewProcess generates a new Event with UUID and timestamp.
+func GenerateNewNextStepEventForNewProcess(stepName string) entities.NextStepEvent {
+	var newEvent entities.NextStepEvent
 
-	nextStepEvent.ID = guuid.New().String()
-	nextStepEvent.ProcessInstanceID = guuid.New().String()
+	newEvent.ID = guuid.New().String()
+	newEvent.ProcessInstanceID = guuid.New().String()
 	//Set default broker ip if not set
 	processName, isPresent := os.LookupEnv("sawu_process_name")
 	if isPresent == false {
 		processName = config.Defaults.Sawu.ProcessName
 	}
-	nextStepEvent.ProcessName = processName
-	nextStepEvent.ProcessStep = stepName
-	nextStepEvent.ProcessStepClass = stepName
+	newEvent.ProcessName = processName
+	newEvent.ProcessStep = stepName
+	newEvent.ProcessStepClass = stepName
 	timestamp := strconv.FormatInt(time.Now().UnixNano(), 10)
 	shortTimestamp := timestamp[0 : len(timestamp)-6]
-	nextStepEvent.TimeStamp = shortTimestamp
+	newEvent.TimeStamp = shortTimestamp
 
-	return nextStepEvent
+	return newEvent
+}
+
+// GenerateNewNextStepEvent generates a new Event with UUID and timestamp.
+func GenerateNewNextStepEvent(oldEvent entities.NextStepEvent, stepName string) entities.NextStepEvent {
+	newEvent := GenerateNewNextStepEventForNewProcess(stepName)
+	newEvent.ProcessInstanceID = oldEvent.ProcessInstanceID
+	newEvent.ComingFromID = oldEvent.ID
+	return newEvent
 }

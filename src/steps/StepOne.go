@@ -7,9 +7,8 @@ import (
 )
 
 // StepOne is the first example step in the workflow.
-func StepOne(nextStepEvent entities.NextStepEvent) (entities.NextStepEvent, error) {
-	newEvent := GenerateNewNextStepEvent("StepTwo")
-	newEvent.ComingFromID = nextStepEvent.ID
+func StepOne(oldStepEvent entities.NextStepEvent) (entities.NextStepEvent, error) {
+	newEvent := GenerateNewNextStepEvent(oldStepEvent, "StepTwo")
 	newEvent.Data = "Banana..."
 	log.Info("I'm in step one.")
 	return newEvent, nil

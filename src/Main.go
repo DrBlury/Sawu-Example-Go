@@ -35,7 +35,7 @@ func main() {
 func addRestController() {
 	app.Get("/start/:data", func(c *fiber.Ctx) error {
 		// Generate new Event
-		nextStepEvent := steps.GenerateNewNextStepEvent("StepOne")
+		nextStepEvent := steps.GenerateNewNextStepEventForNewProcess("StepOne")
 		nextStepEvent.Data = c.Params("data")
 		// Send Event to Kafka
 		kafka.SendNextStepEvent(nextStepEvent)
