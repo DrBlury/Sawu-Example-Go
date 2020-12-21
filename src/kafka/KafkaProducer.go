@@ -64,8 +64,8 @@ func SendNextStepEvent(nextStepEvent entities.NextStepEvent) {
 }
 
 func serialize(nextStepEvent entities.NextStepEvent) string {
-	event := fmt.Sprintf("id=%s,timestamp=%s,processName=%s,processInstanceID=%s,processStep=%s,internal=%s,retryCount=%s,$e%%,%s",
-		nextStepEvent.ID, nextStepEvent.TimeStamp, nextStepEvent.ProcessName, nextStepEvent.ProcessInstanceID, nextStepEvent.ProcessStep, nextStepEvent.Internal, nextStepEvent.RetryCount, nextStepEvent.Data)
+	event := fmt.Sprintf("id=%s,timestamp=%s,processName=%s,comingFromID=%s,processInstanceID=%s,processStep=%s,internal=%s,retryCount=%s,$e%%,%s",
+		nextStepEvent.ID, nextStepEvent.TimeStamp, nextStepEvent.ProcessName, nextStepEvent.ComingFromID, nextStepEvent.ProcessInstanceID, nextStepEvent.ProcessStep, nextStepEvent.Internal, nextStepEvent.RetryCount, nextStepEvent.Data)
 
 	return event
 }
