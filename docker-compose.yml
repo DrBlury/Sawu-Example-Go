@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  goapplication:
+    build: .
+    image: goapplication:1.0
+    ports: 
+      - "3000:3000"
+    environment:
+      - fiber_port=3000
+      - fiber_user=admin
+      - fiber_password=12345

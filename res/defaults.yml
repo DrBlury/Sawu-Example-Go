@@ -1,0 +1,14 @@
+port: 3000
+sawu:
+  separator: "$e%,"
+  processname: "example-process-go"
+kafka:
+  broker:
+    ipaddress: "192.168.1.9"
+  consumer:
+    consumergroup: "example-process-go"
+    topics:
+      - example-process-go-stepone
+      - example-process-go-steptwo
+      - example-process-go-stepthree
+
