@@ -8,7 +8,7 @@ kafka:
   consumer:
     consumergroup: "example-process-go"
     topics:
-      - example-process-go-stepone
-      - example-process-go-steptwo
-      - example-process-go-stepthree
+      - example-process-go-StepOne
+      - example-process-go-StepTwo
+      - example-process-go-StepThree
 

@@ -113,6 +113,8 @@ func DoKafkaConsumerStuff() {
 				if event.Code() == kafka.ErrAllBrokersDown {
 					run = false
 				}
+			case kafka.OffsetsCommitted:
+				continue
 			default:
 				fmt.Printf("Ignored %v\n", event)
 			}
