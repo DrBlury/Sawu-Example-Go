@@ -9,7 +9,9 @@ import (
 // StepThree is the third example step in the workflow.
 func StepThree(oldStepEvent entities.NextStepEvent) (entities.NextStepEvent, error) {
 	newEvent := GenerateNewNextStepEvent(oldStepEvent, "SAWUEND")
-	newEvent.Data = newEvent.Data + " - this is a new Event from Step three"
+	if len(oldStepEvent.Data) != 0 {
+		newEvent.Data = oldStepEvent.Data + " - this is a new Event from Step three"
+	}
 	log.Info("I'm in step three.")
 	return newEvent, nil
 }

@@ -1,6 +1,7 @@
 package steps
 
 import (
+	"errors"
 	"os"
 	"reflect"
 	"sawu-example-go/config"
@@ -28,6 +29,11 @@ func LoadStepFunctions() {
 
 // Call calls a specific function of the StubStorage
 func Call(funcName string, params ...interface{}) (result interface{}, err error) {
+	if funcName == "SAWUEND" {
+		log.Debug("Hit End of process.")
+		return nil, errors.New("Hit end of process. Nothing to do.")
+	}
+
 	f := reflect.ValueOf(StubStorage[funcName])
 	if len(params) != f.Type().NumIn() {
 		log.Error("The number of params is out of index")

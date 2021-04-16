@@ -92,15 +92,18 @@ func DoKafkaConsumerStuff() {
 				// Get the function name from the process step
 				functionName := processEvent.ProcessStep
 				if functionName == "" {
+					fmt.Println("There is no function name.")
 					continue
 				}
 
 				// Call the function with the old processEvent as input param
+				// TODO Retrun only the new data and the next step name
 				result, funcerr := steps.Call(functionName, processEvent)
 				if funcerr != nil {
 					log.Error(funcerr)
 					continue
 				}
+				// TODO create the new event with old data from processEvent
 
 				// Turn the Interface to the actual struct
 				newEvent := result.(entities.NextStepEvent)
